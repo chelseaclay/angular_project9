@@ -1,7 +1,7 @@
 <div class="grid-100 row controls">
   <div class="grid-30">
-    <select ng-model="category" ng-init="categories[0]" ng-change="getRecipesByCategory(category)"  ng-options="category.name for category in categories track by category.name" >
-      <option value="">All Categories</option>
+    <select ng-model="category"  ng-change="getRecipesByCategory(category)"  ng-options="category.name for category in categories track by category.name" >
+      <option selected value="">All Categories</option>
     </select>
   </div>
   <div class="grid-70">

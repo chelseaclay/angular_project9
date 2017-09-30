@@ -16,7 +16,7 @@ angular.module('app')
     };
     //Gets all of the recipes for the specified category.
     this.getRecipesByCategory = (category, callback) =>{
-        $http.get('/api/recipes?category={category}').then(callback)
+        $http.get(`/api/recipes?category=${category.name}`).then(callback)
     };
     //Gets the recipe for the specified ID.
     this.getRecipesByID = (id, callback) =>{
