@@ -16,13 +16,14 @@ angular
 
     $scope.getRecipesByCategory = function(category){
         if(category === "All Categories"){
-            console.log('all')
+            console.log('all');
             dataService.getRecipes(function(response){
                 $scope.recipes = response.data
             });
         }else{
             dataService.getRecipesByCategory(category, function(response){
-                console.log(response.data)
+                console.log(category.name);
+                console.log(response.data);
                 $scope.recipes = response.data;
             })
         }
