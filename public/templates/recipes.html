@@ -19,9 +19,9 @@
 <div class="grid-100 row addHover" ng-if="recipes.length > 0" ng-repeat="recipe in recipes">
   <a ng-href="#!/edit/{{recipe._id}}" ng-click="updateRecipe($index)">
     <div class="grid-70">
-      <p>
-        {{recipe.name}} {{recipe.description}} {{recipe.category}}
-      </p>
+      <h3>{{recipe.name}}<span ng-if="recipe.category" class="category"> - {{recipe.category}}</span></h3>
+
+      <p>{{recipe.description}}</p>
     </div>
   </a>
   <div class="hoverBlock">
