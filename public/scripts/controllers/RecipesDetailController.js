@@ -5,10 +5,8 @@
         .controller('RecipeDetailController', RecipeDetailController);
 
     function RecipeDetailController($scope, dataService,$routeParams, $location) {
-        /* jshint validthis: true */
-        let vm = this;
-        vm.recipe = recipe;
-            vm.recipe = {
+
+            $scope.recipe = {
                 name: "",
                 description: "",
                 category: "",
@@ -20,45 +18,45 @@
                 StepDescription: ""
             };
 
-        vm.categories = [];
-        vm.foodItems = [];
-        vm.errors = [];
+            $scope.categories = [];
+            $scope.foodItems = [];
+            $scope.errors = [];
 
             if($location.url() !== "/add"){
                 let recipeID = $routeParams.id;
                 dataService.getRecipes(recipeID, function(response){
-                    vm.recipe = response.data;
+                    $scope.recipe = response.data;
                 })
             }
 
             dataService.getCategories(function(response){
-                vm.categories = response.data;
+                $scope.categories = response.data;
             });
 
             $scope.redirectHome = function(){
-                vm.path('/');
+                $location.path('/');
             };
 
             dataService.getFoodItems(function(response){
-                vm.foodItems = response.data;
+                $scope.foodItems = response.data;
             });
             $scope.deleteStep = function($index){
-                vm.recipe.steps.splice($index, 1)
+                $scope.recipe.steps.splice($index, 1)
             };
             $scope.addIngredient = function(){
-                vm.recipe.ingredients.push({})
+                $scope.recipe.ingredients.push({})
             };
             $scope.deleteIngredient = function($index){
-                vm.recipe.ingredients.splice($index, 1)
+                $scope.recipe.ingredients.splice($index, 1)
             };
             $scope.addStep = function(){
-                vm.recipe.steps.push({})
+                $scope.recipe.steps.push({})
             };
             $scope.saveRecipe = function(){
-                if(vm.recipe._id){
-                    dataService.putRecipesID(vm.recipe);
+                if($scope.recipe._id){
+                    dataService.putRecipesID($scope.recipe);
                 }else{
-                    dataService.postRecipesID(vm.recipe);
+                    dataService.postRecipesID($scope.recipe);
                 }
                 $location.path('/');
             };
