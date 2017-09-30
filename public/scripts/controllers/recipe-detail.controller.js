@@ -52,16 +52,17 @@
                     dataService.updateRecipe(recipe, (response) =>{
                         console.log('edit');
                         $scope.recipe = response.data;
-                        $location.url('/');
+
                     });
                 }else{
                     dataService.addRecipe(recipe, (response) =>{
                         $scope.recipe = response.data;
                         console.log('add');
-                        $location.url('/');
+
                 });
 
                 }
+                $location.url('/');
 
 
         }
