@@ -1,5 +1,5 @@
 # Single Page App in Angular JS
-## FrontEnd Web Developer Project 6
+## FullStack Tech Degree Project 9
 ### Angular JS, Node, Express, JavaScript, HTML5, CSS3
 
 
@@ -18,9 +18,6 @@ npm install
 npm run-script db
 npm start
 ```
-#### By Debbie O'Brien
-1 October 2017
-
 
 ![Screenshot](/screenShot.png)
 
@@ -66,3 +63,5 @@ npm start
             $scope.recipe.ingredients.splice($index, 1)
         };
 ```
+#### By Debbie O'Brien
+1 October 2017
