@@ -20,7 +20,7 @@
         });
 
         //if the url is equal to the edit/recipeID then get that recipe
-        if ($location.url() === `/edit/${recipe._id}`) {
+        if($location.url() === '/edit/' + $routeParams.id){
             dataService.getRecipesByID($routeParams.id, response => {
                 $scope.recipe = response.data;
             });
@@ -60,7 +60,7 @@
         };
         //redirect to home when click on cancel
         $scope.redirectHome = () => {
-            $location.url('/');
+            $location.path('/');
         };
     }
 })();

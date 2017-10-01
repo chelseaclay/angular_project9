@@ -31,9 +31,8 @@
             $location.url('/add');
         };
         //deletes from array
-        $scope.deleteRecipe = function (id, $index) {
-
-            dataService.deleteRecipeById(id, () => {
+        $scope.deleteRecipe = function (recipe, $index) {
+            dataService.deleteRecipeById(recipe, () => {
                 $scope.recipes.splice($index, 1);
             });
         };

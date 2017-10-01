@@ -31,8 +31,8 @@ angular.module('app')
         $http.post('/api/recipes', recipe)
     };
     //Deletes the recipe for the specified ID.
-    this.deleteRecipeById = (id, callback) =>{
-        $http.delete(`/api/recipes/${id}`).then(callback)
+    this.deleteRecipeById = (recipe, callback) =>{
+        $http.delete(`/api/recipes/${recipe._id}`).then(callback);
     };
 });
 })();
