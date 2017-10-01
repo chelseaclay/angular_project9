@@ -43,6 +43,8 @@
         //open alert
         $scope.openAlertModal = function(recipe, $index){
             $scope.showModel = true;
+            $scope.recipe = recipe;
+            $scope.$index = $index;
         };
         //close alert
         $scope.closeAlertModal = function(){

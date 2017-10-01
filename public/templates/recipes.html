@@ -29,21 +29,22 @@
       <div class="flush-right">
         <p>
           <a ng-href="#!/edit/{{recipe._id}}" ng-click="updateRecipe($index)"> <img src="images/edit.svg" height="12px"> Edit </a>
-          <a ng-click="openAlertModal()" class="no-action-link"> <img src="images/delete.svg" height="12px"> Delete </a>
+          <a ng-click="openAlertModal(recipe, index)" class="no-action-link"> <img src="images/delete.svg" height="12px"> Delete </a>
         </p>
       </div>
     </div>
   </div>
-  <!-- Alert Modal -->
-  <div class="modal" ng-if="showModel === true">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h3>Do you really want to delete "<strong>{{recipe.name}}</strong>"?</h3>
-        <p>This action cannot be undone.</p>
-      </div>
-      <div class="modal-footer">
-        <button class="delete" ng-click="deleteRecipe(recipe, $index)">Delete</button> <button ng-click="closeAlertModal()">Cancel</button>
-      </div>
+
+</div>
+<!-- Alert Modal -->
+<div class="modal" ng-if="showModel === true">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h3>Do you really want to delete "<strong>{{recipe.name}}</strong>"?</h3>
+      <p>This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="delete" ng-click="deleteRecipe(recipe, $index)">Delete</button> <button ng-click="closeAlertModal()">Cancel</button>
     </div>
   </div>
 </div>
