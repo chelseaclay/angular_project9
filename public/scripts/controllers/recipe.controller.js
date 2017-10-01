@@ -26,6 +26,7 @@
                 })
             }
         };
+
         //redirects to the add route
         $scope.addRecipe = function () {
             $location.url('/add');
@@ -40,7 +41,7 @@
 
         //set alert to false until it is clicked
         $scope.showModel = false;
-        //open alert
+        //open alert and bind values so as to open correct recipe modal
         $scope.openAlertModal = function(recipe, $index){
             $scope.showModel = true;
             $scope.recipe = recipe;

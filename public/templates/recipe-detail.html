@@ -5,7 +5,9 @@
   </div>
   <div class="grid-50">
     <div class="flush-right">
-      <button ng-click="saveRecipe(recipe)">Save Recipe</button>
+      <button ng-if="recipe.name && recipe.description && recipe.category
+                    && recipe.prepTime && recipe.cookTime"
+              ng-click="saveRecipe(recipe)">Save Recipe</button>
       <button ng-click="redirectHome()" class="secondary">Cancel</button>
     </div>
   </div>
@@ -20,7 +22,7 @@
   </div>
   <div class="grid-40">
     <p>
-      <input type="text" ng-model="recipe.name">
+      <input type="text" ng-model="recipe.name" name="name" required>
     </p>
   </div>
 </div>
@@ -34,7 +36,7 @@
   </div>
   <div class="grid-60">
     <p>
-      <textarea ng-model="recipe.description"></textarea>
+      <textarea ng-model="recipe.description" name="description" required></textarea>
     </p>
   </div>
 </div>
@@ -108,7 +110,7 @@
   <div class="ingredient-row" ng-repeat="ingredient in recipe.ingredients">
     <div class="prefix-20 grid-30">
       <p>
-        <select ng-model="ingredient.foodItem" ng-options="foodItem.name as foodItem.name for foodItem in foodItems">
+        <select ng-init='foodItems[0]' ng-model="ingredient.foodItem" ng-options="foodItem.name as foodItem.name for foodItem in foodItems">
           <option value="">Select Item</option>
         </select>
       </p>

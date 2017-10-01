@@ -62,5 +62,6 @@
         $scope.redirectHome = () => {
             $location.path('/');
         };
+
     }
 })();
