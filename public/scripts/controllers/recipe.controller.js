@@ -34,7 +34,19 @@
         $scope.deleteRecipe = function (recipe, $index) {
             dataService.deleteRecipeById(recipe, () => {
                 $scope.recipes.splice($index, 1);
+                $scope.closeAlertModal();
             });
+        };
+
+        //set alert to false until it is clicked
+        $scope.showModel = false;
+        //open alert
+        $scope.openAlertModal = function(recipe, $index){
+            $scope.showModel = true;
+        };
+        //close alert
+        $scope.closeAlertModal = function(){
+            $scope.showModel = false;
         };
 
     }
