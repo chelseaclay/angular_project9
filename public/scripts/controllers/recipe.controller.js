@@ -50,6 +50,7 @@
         //close alert
         $scope.closeAlertModal = function(){
             $scope.showModel = false;
+            $location.path('/');
         };
 
     }
