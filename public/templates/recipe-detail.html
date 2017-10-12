@@ -1,14 +1,14 @@
 <div class="grid-100 row controls">
   <div class="grid-50">
-    <h2 ng-if="!recipe.name">Add New Recipe</h2>
-    <h2 ng-if="recipe.name">{{recipe.name}}</h2>
+    <h2 ng-if="!vm.recipe.name">Add New Recipe</h2>
+    <h2 ng-if="vm.recipe.name">{{vm.recipe.name}}</h2>
   </div>
   <div class="grid-50">
     <div class="flush-right">
-      <button ng-if="recipe.name && recipe.description && recipe.category
-                    && recipe.prepTime && recipe.cookTime"
-              ng-click="saveRecipe(recipe)">Save Recipe</button>
-      <button ng-click="redirectHome()" class="secondary">Cancel</button>
+      <button ng-if="vm.recipe.name && vm.recipe.description && vm.recipe.category
+                    && vm.recipe.prepTime && vm.recipe.cookTime"
+              ng-click="vm.saveRecipe(recipe)">Save Recipe</button>
+      <button ng-click="vm.redirectHome()" class="secondary">Cancel</button>
     </div>
   </div>
 </div>
@@ -22,7 +22,7 @@
   </div>
   <div class="grid-40">
     <p>
-      <input type="text" ng-model="recipe.name" name="name" required>
+      <input type="text" ng-model="vm.recipe.name" name="name" required>
     </p>
   </div>
 </div>
@@ -36,7 +36,7 @@
   </div>
   <div class="grid-60">
     <p>
-      <textarea ng-model="recipe.description" name="description" required></textarea>
+      <textarea ng-model="vm.recipe.description" name="description" required></textarea>
     </p>
   </div>
 </div>
@@ -50,7 +50,7 @@
   </div>
   <div class="grid-30">
     <p>
-        <select ng-model="recipe.category" ng-init="category[0]"  ng-options="category.name as category.name for category in categories" >
+        <select ng-model="vm.recipe.category" ng-init="category[0]"  ng-options="category.name as category.name for category in vm.categories" >
         <option value="">All Categories</option>
       </select>
     </p>
@@ -66,7 +66,7 @@
   </div>
   <div class="grid-20">
     <p>
-      <input type="number" ng-model="recipe.prepTime">
+      <input type="number" ng-model="vm.recipe.prepTime">
     </p>
   </div>
 </div>
@@ -80,7 +80,7 @@
   </div>
   <div class="grid-20">
     <p>
-      <input type="number" ng-model="recipe.cookTime">
+      <input type="number" ng-model="vm.recipe.cookTime">
     </p>
   </div>
 </div>
@@ -107,10 +107,10 @@
       <label> Amount </label>
     </p>
   </div>
-  <div class="ingredient-row" ng-repeat="ingredient in recipe.ingredients">
+  <div class="ingredient-row" ng-repeat="ingredient in vm.recipe.ingredients">
     <div class="prefix-20 grid-30">
       <p>
-        <select ng-init='foodItems[0]' ng-model="ingredient.foodItem" ng-options="foodItem.name as foodItem.name for foodItem in foodItems">
+        <select ng-init='foodItems[0]' ng-model="ingredient.foodItem" ng-options="foodItem.name as foodItem.name for foodItem in vm.foodItems">
           <option value="">Select Item</option>
         </select>
       </p>
@@ -127,14 +127,14 @@
     </div>
     <div class="grid-5 pad-top">
       <p class="flush-right">
-        <a class="no-action-link" ng-click="deleteIngredient(recipe, $index)"> <img src="images/delete.svg" height="12px"> </a>
+        <a class="no-action-link" ng-click="vm.deleteIngredient(vm.recipe, $index)"> <img src="images/delete.svg" height="12px"> </a>
       </p>
     </div>
   </div>
 
   <div class="prefix-20 grid-80 add-row">
     <p>
-      <button ng-click="addIngredient(recipe)">+ Add Another Ingredient</button>
+      <button ng-click="vm.addIngredient(vm.recipe)">+ Add Another Ingredient</button>
     </p>
   </div>
 
@@ -152,7 +152,7 @@
       <label> Description </label>
     </p>
   </div>
-  <div class="step-row" ng-repeat="step in recipe.steps">
+  <div class="step-row" ng-repeat="step in vm.recipe.steps">
     <div class="prefix-20 grid-75">
       <p>
         <input type="text" ng-model="step.description">
@@ -160,14 +160,14 @@
     </div>
     <div class="grid-5 pad-top">
       <p class="flush-right">
-        <a class="no-action-link" ng-click="deleteStep(recipe, $index)"> <img src="images/delete.svg" height="12px"> </a>
+        <a class="no-action-link" ng-click="vm.deleteStep(vm.recipe, $index)"> <img src="images/delete.svg" height="12px"> </a>
       </p>
     </div>
   </div>
 
   <div class="prefix-20 grid-80 add-row">
     <p>
-     <button ng-click="addStep(recipe)">+ Add Another Step</button>
+     <button ng-click="vm.addStep(vm.recipe)">+ Add Another Step</button>
     </p>
   </div>
 

@@ -4,54 +4,65 @@
         .module('app')
         .controller('RecipesController', RecipesController);
 
-    function RecipesController($scope, dataService, $location) {
+    function RecipesController(dataService, $location) {
+        let vm = this;
+
+        vm.getRecipesByCategory = getRecipesByCategory;
+        vm.addRecipe = addRecipe;
+        vm.deleteRecipe = deleteRecipe;
+        vm.openAlertModal = openAlertModal;
+        vm.closeAlertModal = closeAlertModal;
+
+
         //gets all recipes
         dataService.getRecipes(function (response) {
-            $scope.recipes = response.data;
+            vm.recipes = response.data;
         });
         //gets all Categories
         dataService.getCategories(function (response) {
-            $scope.categories = response.data;
+            vm.categories = response.data;
         });
         //if there is a category show recipe of that category else show all
-        $scope.getRecipesByCategory = function (category) {
+        function getRecipesByCategory (category) {
             if (category) {
                 dataService.getRecipesByCategory(category, function (response) {
-                    $scope.recipes = response.data;
+                    vm.recipes = response.data;
                 });
             } else {
                 dataService.getRecipes(function (response) {
-                    $scope.recipes = response.data
+                    vm.recipes = response.data
 
                 })
             }
         };
 
         //redirects to the add route
-        $scope.addRecipe = function () {
+        function addRecipe () {
             $location.url('/add');
-        };
+        }
         //deletes from array
-        $scope.deleteRecipe = function (recipe, $index) {
+        function deleteRecipe(recipe, $index) {
+            console.log($index);
+            console.log(recipe);
             dataService.deleteRecipeById(recipe, () => {
-                $scope.recipes.splice($index, 1);
-                $scope.closeAlertModal();
+                vm.recipes.splice($index, 1);
+                vm.closeAlertModal();
             });
-        };
+        }
 
         //set alert to false until it is clicked
-        $scope.showModel = false;
+        vm.showModel = false;
         //open alert and bind values so as to open correct recipe modal
-        $scope.openAlertModal = function(recipe, $index){
-            $scope.showModel = true;
-            $scope.recipe = recipe;
-            $scope.$index = $index;
-        };
+        function openAlertModal(recipe, $index){
+            vm.showModel = true;
+            vm.recipe = recipe;
+            vm.$index = $index;
+        }
         //close alert
-        $scope.closeAlertModal = function(){
-            $scope.showModel = false;
+        function closeAlertModal(){
+            vm.showModel = false;
             $location.path('/');
-        };
+        }
 
     }
 })();

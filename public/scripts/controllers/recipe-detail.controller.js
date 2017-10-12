@@ -4,64 +4,71 @@
         .module('app')
         .controller('RecipeDetailController', RecipeDetailController);
 
-    function RecipeDetailController($scope, dataService, $routeParams, $location) {
+    function RecipeDetailController(dataService, $routeParams, $location) {
+        let vm = this;
         //values to add a new recipe
-        $scope.recipe = {};
-        $scope.recipe.ingredients = [];
-        $scope.recipe.steps = [];
+        vm.recipe = {};
+        vm.recipe.ingredients = [];
+        vm.recipe.steps = [];
+        vm.addIngredient = addIngredient;
+        vm.deleteIngredient = deleteIngredient;
+        vm.addStep = addStep;
+        vm.deleteStep = deleteStep;
+        vm.saveRecipe = saveRecipe;
+        vm.redirectHome = redirectHome;
 
         //get Categories
         dataService.getCategories(response => {
-            $scope.categories = response.data;
+            vm.categories = response.data;
         });
         //Gets the food items
         dataService.getFoodItems(response => {
-            $scope.foodItems = response.data;
+            vm.foodItems = response.data;
         });
 
         //if the url is equal to the edit/recipeID then get that recipe
         if($location.url() === '/edit/' + $routeParams.id){
             dataService.getRecipesByID($routeParams.id, response => {
-                $scope.recipe = response.data;
+                vm.recipe = response.data;
             });
         }
         //push to array when add ingredient
-        $scope.addIngredient = recipe => {
-            recipe.ingredients.push({
+        function addIngredient () {
+            vm.recipe.ingredients.push({
                 "foodItem": "",
                 "condition": "",
                 "amount": ""
             })
-        };
+        }
         //delete ingredient with splice
-        $scope.deleteIngredient = ($index) => {
-            $scope.recipe.ingredients.splice($index, 1)
-        };
+        function deleteIngredient($index) {
+            vm.recipe.ingredients.splice($index, 1)
+        }
         //push to array when add a step
-        $scope.addStep = recipe => {
-            recipe.steps.push({"description": ""})
-        };
+        function addStep() {
+            vm.recipe.steps.push({"description": ""})
+        }
         //delete step with splice
-        $scope.deleteStep = ($index) => {
-            $scope.recipe.steps.splice($index, 1)
-        };
+        function deleteStep($index) {
+            vm.recipe.steps.splice($index, 1)
+        }
         //save recipe if recipe id is the same as url then update else add then redirect
-        $scope.saveRecipe = recipe => {
-            if (`/edit/${recipe._id}` === $location.url()) {
-                dataService.updateRecipe(recipe, (response) => {
-                    $scope.recipe = response.data;
+        function saveRecipe(){
+            if (`/edit/${vm.recipe._id}` === $location.url()) {
+                dataService.updateRecipe(vm.recipe, (response) => {
+                    vm.recipe = response.data;
                 });
             } else {
-                dataService.addRecipe(recipe, (response) => {
-                    $scope.recipe = response.data;
+                dataService.addRecipe(vm.recipe, (response) => {
+                    vm.recipe = response.data;
                 });
             }
             $location.url('/');
-        };
+        }
         //redirect to home when click on cancel
-        $scope.redirectHome = () => {
+       function redirectHome(){
             $location.path('/');
-        };
+        }
 
     }
 })();
